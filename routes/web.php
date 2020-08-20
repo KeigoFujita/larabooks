@@ -26,9 +26,9 @@ Route::view('/books/create', 'book.create');
 Route::view('/books/edit', 'book.edit');
 Route::view('/books/show', 'book.show');
 
-Route::view('/categories', 'category.index');
-Route::view('/categories/create', 'category.create');
-Route::view('/categories/edit', 'category.edit');
+// Route::view('/categories', 'category.index');
+// Route::view('/categories/create', 'category.create');
+// Route::view('/categories/edit', 'category.edit');
 
 
 Route::view('/authors', 'author.index');
@@ -37,3 +37,9 @@ Route::view('/authors/edit', 'author.edit');
 
 
 Route::view('/my-devices', 'mydevices.index');
+
+
+
+//Category
+
+Route::resource('categories', 'CategoryController');

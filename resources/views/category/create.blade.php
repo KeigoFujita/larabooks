@@ -2,6 +2,14 @@
 
 @section('content')
 
+@if ($errors->any())
+<div class="alert alert-danger">
+    @foreach ($errors->all() as $error)
+    {{ $error }}
+    @endforeach
+</div>
+@endif
+
 <div class="container">
     <div class="card">
         <div class="card-header">
@@ -9,7 +17,7 @@
         </div>
         <div class="card-body">
 
-            <form action="/books/store" method="POST">
+            <form action="{{ route('categories.store') }}" method="POST">
                 @csrf
                 <div class="form-group">
                     <label for="name">Category Name</label>

@@ -2,6 +2,12 @@
 
 @section('content')
 
+@if (session()->has('success'))
+<div class="alert alert-success">
+    {{ session()->get('success') }}
+</div>
+@endif
+
 <div class="container">
     <div class="card">
         <div class="card-header">
@@ -22,36 +28,27 @@
                     <th>Actions</th>
                 </thead>
                 <tbody>
+                    @forelse ($categories as $category)
                     <tr>
-                        <td>Fantasy</td>
-                        <td>123</td>
-                        <td>July 12, 2020</td>
-                        <td>July 12, 2020</td>
+                        <td>{{ $category->name }}</td>
+                        <td>{{ $category->books->count() }}</td>
+                        <td>{{ $category->updated_at->format('M d, Y') }}</td>
+                        <td>{{ $category->created_at->format('M d, Y') }}</td>
                         <td>
-                            <a href="/categories/edit" class="btn btn-sm btn-success">Edit</a>
-                            <a href="#" class="btn btn-sm btn-outline-danger">Delete</a>
+                            <a href="{{ route('categories.edit',$category) }}" class="btn btn-sm btn-success">Edit</a>
+                            <form action="{{ route('categories.destroy',$category) }}" method="POST" class="d-inline">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                            </form>
                         </td>
                     </tr>
-                    <tr>
-                        <td>Sci Fi</td>
-                        <td>123</td>
-                        <td>July 12, 2020</td>
-                        <td>July 12, 2020</td>
-                        <td>
-                            <a href="/categories/edit" class="btn btn-sm btn-success">Edit</a>
-                            <a href="#" class="btn btn-sm btn-outline-danger">Delete</a>
-                        </td>
+
+                    @empty
+                    <tr class="">
+                        <td colspan="5" align="center">No data</td>
                     </tr>
-                    <tr>
-                        <td>Romance</td>
-                        <td>123</td>
-                        <td>July 12, 2020</td>
-                        <td>July 12, 2020</td>
-                        <td>
-                            <a href="/categories/edit" class="btn btn-sm btn-success">Edit</a>
-                            <a href="#" class="btn btn-sm btn-outline-danger">Delete</a>
-                        </td>
-                    </tr>
+                    @endforelse
                 </tbody>
             </table>
         </div>
