@@ -1,7 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-
+@if (session()->has('success'))
+<div class="alert alert-success">
+    {{ session()->get('success') }}
+</div>
+@endif
 <div class="container">
     <div class="card">
         <div class="card-header">
@@ -22,36 +26,26 @@
                     <th>Actions</th>
                 </thead>
                 <tbody>
+                    @forelse ($authors as $author)
                     <tr>
-                        <td>Melinda Gates</td>
-                        <td>123</td>
-                        <td>July 12, 2020</td>
-                        <td>July 12, 2020</td>
+                        <td>{{ $author->name }}</td>
+                        <td>{{ $author->books->count() }}</td>
+                        <td>{{ $author->updated_at->format('M d, Y') }}</td>
+                        <td>{{ $author->created_at->format('M d, Y') }}</td>
                         <td>
-                            <a href="/authors/edit" class="btn btn-sm btn-success">Edit</a>
-                            <a href="#" class="btn btn-sm btn-outline-danger">Delete</a>
+                            <a href="{{ route('authors.edit',$author) }}" class="btn btn-sm btn-success">Edit</a>
+                            <form action="{{ route('authors.destroy',$author) }}" method="POST" class="d-inline">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                            </form>
                         </td>
                     </tr>
-                    <tr>
-                        <td>Bill Gates</td>
-                        <td>123</td>
-                        <td>July 12, 2020</td>
-                        <td>July 12, 2020</td>
-                        <td>
-                            <a href="/authors/edit" class="btn btn-sm btn-success">Edit</a>
-                            <a href="#" class="btn btn-sm btn-outline-danger">Delete</a>
-                        </td>
+                    @empty
+                    <tr class="">
+                        <td colspan="5" align="center">No data</td>
                     </tr>
-                    <tr>
-                        <td>James Wizard</td>
-                        <td>123</td>
-                        <td>July 12, 2020</td>
-                        <td>July 12, 2020</td>
-                        <td>
-                            <a href="/authors/edit" class="btn btn-sm btn-success">Edit</a>
-                            <a href="#" class="btn btn-sm btn-outline-danger">Delete</a>
-                        </td>
-                    </tr>
+                    @endforelse
                 </tbody>
             </table>
         </div>

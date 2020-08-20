@@ -31,9 +31,9 @@ Route::view('/books/show', 'book.show');
 // Route::view('/categories/edit', 'category.edit');
 
 
-Route::view('/authors', 'author.index');
-Route::view('/authors/create', 'author.create');
-Route::view('/authors/edit', 'author.edit');
+// Route::view('/authors', 'author.index');
+// Route::view('/authors/create', 'author.create');
+// Route::view('/authors/edit', 'author.edit');
 
 
 Route::view('/my-devices', 'mydevices.index');
@@ -43,3 +43,7 @@ Route::view('/my-devices', 'mydevices.index');
 //Category
 
 Route::resource('categories', 'CategoryController');
+
+
+//Author
+Route::resource('authors', 'AuthorController');
