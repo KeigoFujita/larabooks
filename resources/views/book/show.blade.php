@@ -3,11 +3,13 @@
 @section('content')
 
 <div class="container" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">
-    <p class="book-title font-sans">Harry Potter</p>
+    <p class="book-title font-sans">{{ $book->title }}</p>
     <div class="d-flex align-items-center justify-content-between">
-        <p class="book-author font-sans">Amanda Williams</p>
+        <p class="book-author font-sans">
+            {{ $book->authors->pluck('name')->implode(', ') }}
+        </p>
         <span class="book-category">
-            <p>Horror</p>
+            <p>{{ $book->category->name }}</p>
         </span>
     </div>
     <hr>

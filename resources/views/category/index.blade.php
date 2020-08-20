@@ -8,6 +8,12 @@
 </div>
 @endif
 
+@if (session()->has('danger'))
+<div class="alert alert-danger">
+    {{ session()->get('danger') }}
+</div>
+@endif
+
 <div class="container">
     <div class="card">
         <div class="card-header">

@@ -44,6 +44,8 @@ Route::view('/my-devices', 'mydevices.index');
 
 Route::resource('categories', 'CategoryController');
 
-
 //Author
 Route::resource('authors', 'AuthorController');
+
+//Book
+Route::resource('books', 'BookController');

@@ -89,6 +89,12 @@ class AuthorController extends Controller
      */
     public function destroy(Author $author)
     {
+
+        if ($author->books->count() !== 0) {
+            session()->flash('danger', 'Cannot remove author with books!');
+            return redirect(route('authors.index'));
+        }
+
         $author->delete();
         session()->flash('success', 'Author deleted successfully!');
         return redirect(route('authors.index'));

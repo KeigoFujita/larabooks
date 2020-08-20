@@ -1,7 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-
+@if ($errors->any())
+<div class="alert alert-danger">
+    @foreach ($errors->all() as $error)
+    {{ $error }}
+    @endforeach
+</div>
+@endif
 <div class="container">
     <div class="card">
         <div class="card-header">
@@ -9,7 +15,7 @@
         </div>
         <div class="card-body">
 
-            <form action="/books/store" method="POST">
+            <form action="{{ route('books.store') }}" method="POST">
                 @csrf
                 <div class="form-group">
                     <label for="title">Title</label>
@@ -22,22 +28,20 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="category">Category</label>
-                    <select name="category" class="form-control">
-                        <option value="">Fiction</option>
-                        <option value="">Horror</option>
-                        <option value="">Fantasy</option>
-                        <option value="">Romance</option>
+                    <label for="category_id">Category</label>
+                    <select name="category_id" class="form-control">
+                        @foreach ($categories as $category)
+                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                        @endforeach
                     </select>
                 </div>
 
                 <div class="form-group">
-                    <label for="category">Author</label>
-                    <select name="category" class="form-control" multiple>
-                        <option value="">Kaithlyn Ramos</option>
-                        <option value="">Amanda James</option>
-                        <option value="">Oprah Miley</option>
-                        <option value="">Jilley Jones</option>
+                    <label for="authors">Author</label>
+                    <select name="authors[]" class="form-control" multiple>
+                        @foreach ($authors as $author)
+                        <option value="{{ $author->id }}">{{ $author->name }}</option>
+                        @endforeach
                     </select>
                 </div>
 

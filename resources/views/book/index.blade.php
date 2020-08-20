@@ -1,7 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-
+@if (session()->has('success'))
+<div class="alert alert-success">
+    {{ session()->get('success') }}
+</div>
+@endif
 <div class="container">
     <div class="card">
         <div class="card-header">
@@ -17,39 +21,28 @@
                     <th>Actions</th>
                 </thead>
                 <tbody>
+
+                    @forelse ($books as $book)
                     <tr>
-                        <td>Book 1</td>
-                        <td>1234</td>
-                        <td>July 12, 2020</td>
-                        <td>July 12, 2020</td>
+                        <td>{{ $book->title }}</td>
+                        <td>{{ $book->no_of_pages }}</td>
+                        <td>{{ $book->updated_at->format('M d, Y') }}</td>
+                        <td>{{ $book->created_at->format('M d, Y') }}</td>
                         <td>
-                            <a href="/books/show" class="btn btn-sm btn-primary">View</a>
-                            <a href="/books/edit" class="btn btn-sm btn-success">Edit</a>
-                            <a href="#" class="btn btn-sm btn-outline-danger">Delete</a>
+                            <a href="{{ route('books.show',$book) }}" class="btn btn-sm btn-primary">Show</a>
+                            <a href="{{ route('books.edit',$book) }}" class="btn btn-sm btn-success">Edit</a>
+                            <form action="{{ route('books.destroy',$book) }}" method="POST" class="d-inline">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                            </form>
                         </td>
                     </tr>
-                    <tr>
-                        <td>Book 2</td>
-                        <td>1234</td>
-                        <td>July 12, 2020</td>
-                        <td>July 12, 2020</td>
-                        <td>
-                            <a href="/books/show" class="btn btn-sm btn-primary">View</a>
-                            <a href="/books/edit" class="btn btn-sm btn-success">Edit</a>
-                            <a href="#" class="btn btn-sm btn-outline-danger">Delete</a>
-                        </td>
+                    @empty
+                    <tr class="">
+                        <td colspan="5" align="center">No data</td>
                     </tr>
-                    <tr>
-                        <td>Book 3</td>
-                        <td>1234</td>
-                        <td>July 12, 2020</td>
-                        <td>July 12, 2020</td>
-                        <td>
-                            <a href="/books/show" class="btn btn-sm btn-primary">View</a>
-                            <a href="/books/edit" class="btn btn-sm btn-success">Edit</a>
-                            <a href="#" class="btn btn-sm btn-outline-danger">Delete</a>
-                        </td>
-                    </tr>
+                    @endforelse
 
                 </tbody>
             </table>
