@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,32 +21,16 @@ Route::get('/', function () {
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
-
-Route::view('/books', 'book.index');
-Route::view('/books/create', 'book.create');
-Route::view('/books/edit', 'book.edit');
-Route::view('/books/show', 'book.show');
-
-// Route::view('/categories', 'category.index');
-// Route::view('/categories/create', 'category.create');
-// Route::view('/categories/edit', 'category.edit');
-
-
-// Route::view('/authors', 'author.index');
-// Route::view('/authors/create', 'author.create');
-// Route::view('/authors/edit', 'author.edit');
-
-
 Route::view('/my-devices', 'mydevices.index');
 
 
+Route::group(['middleware' => ['auth']], function () {
+    //Category
+    Route::resource('categories', 'CategoryController');
 
-//Category
+    //Author
+    Route::resource('authors', 'AuthorController');
 
-Route::resource('categories', 'CategoryController');
-
-//Author
-Route::resource('authors', 'AuthorController');
-
-//Book
-Route::resource('books', 'BookController');
+    //Book
+    Route::resource('books', 'BookController');
+});
