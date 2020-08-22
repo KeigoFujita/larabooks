@@ -21,8 +21,6 @@ Route::get('/', function () {
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::view('/my-devices', 'mydevices.index');
-
 Route::group(['middleware' => ['auth']], function () {
     //Category
     Route::resource('categories', 'CategoryController');
@@ -32,4 +30,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     //Book
     Route::resource('books', 'BookController');
+
+    Route::get('/my-devices', 'MyDevicesController@index')->name('mydevices.index');
+    Route::delete('/my-devices/{device}', 'MyDevicesController@delete')->name('mydevices.delete');
 });

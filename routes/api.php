@@ -25,4 +25,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/user', function (Request $request) {
         return $request->user();
     });
+
+
+    //Book
+    Route::apiResource('books', 'API\APIBookController', ['as' => 'api']);
 });
