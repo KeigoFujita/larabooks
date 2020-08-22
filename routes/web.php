@@ -23,7 +23,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::view('/my-devices', 'mydevices.index');
 
-
 Route::group(['middleware' => ['auth']], function () {
     //Category
     Route::resource('categories', 'CategoryController');
