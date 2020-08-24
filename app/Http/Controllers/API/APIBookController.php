@@ -75,9 +75,22 @@ class APIBookController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Book $book)
     {
-        //
+        $request->validate([
+            'title' => "required|unique:books,title," . $book->id,
+            'no_of_pages' => "required|min:1|max:100",
+            'category_id' => "required",
+            'authors' => "required"
+        ]);
+
+        $book->update([
+            'title' => $request->title,
+            'no_of_pages' => $request->no_of_pages,
+            'category_id' => $request->category_id
+        ]);
+        $book->authors()->sync($request->authors);
+        return new BookResource($book);
     }
 
     /**
@@ -86,8 +99,9 @@ class APIBookController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Book $book)
     {
-        //
+        $book->delete();
+        return "Deleted Successfully!";
     }
 }
