@@ -18,15 +18,18 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-Route::post('login', 'API\Auth\LoginController@login');
 
-Route::group(['middleware' => ['auth:sanctum']], function () {
-    Route::post('logout', 'API\Auth\LoginController@logout');
-    Route::get('/user', function (Request $request) {
-        return $request->user();
+Route::as('api.')->group(function () {
+    Route::post('login', 'API\Auth\LoginController@login')->name('login');
+    Route::post('register', 'API\Auth\RegisterController@register')->name('login');
+
+    Route::middleware('auth:sanctum')->group(function () {
+
+        Route::post('logout', 'API\Auth\LoginController@logout')->name('logout');
+        Route::get('/user', function (Request $request) {
+            return $request->user();
+        });
+        //Book
+        Route::apiResource('books', 'API\APIBookController');
     });
-
-
-    //Book
-    Route::apiResource('books', 'API\APIBookController', ['as' => 'api']);
 });
