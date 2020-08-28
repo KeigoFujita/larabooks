@@ -17,10 +17,10 @@
     <!-- Styles -->
     {{-- <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/styles.css') }}" rel="stylesheet"> --}}
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/KeigoFujita/larabooks/public/css/app.css"
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/KeigoFujita/larabooks@module_1/public/css/app.css"
         crossorigin="anonymous">
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/KeigoFujita/larabooks/public/css/styles.css"
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/KeigoFujita/larabooks@module_1/public/css/styles.css"
         crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
 </head>
@@ -116,7 +116,7 @@
         </main>
     </div>
     {{-- <script src="{{ asset('js/app.js') }}"></script> --}}
-    <script src="https://cdn.jsdelivr.net/gh/KeigoFujita/larabooks/public/js/app.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/KeigoFujita/larabooks@module_1/public/js/app.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
     <script>
         $(document).ready(function() {
