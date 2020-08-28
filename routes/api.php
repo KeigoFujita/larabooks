@@ -31,5 +31,8 @@ Route::as('api.')->group(function () {
         });
         //Book
         Route::apiResource('books', 'API\APIBookController');
+
+        //Categories
+        Route::apiResource('categories', 'API\APICategoryController');
     });
 });
