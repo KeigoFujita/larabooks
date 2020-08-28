@@ -4,7 +4,7 @@ namespace App\Http\Resources\Author;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class AuthorResource extends JsonResource
+class AuthorCollectionResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,7 +17,8 @@ class AuthorResource extends JsonResource
         return [
             'name' => $this->name,
             'no_of_books' => $this->books->count(),
-            'created_at' => $this->created_at->format('M d, Y')
+            'created_at' => $this->created_at->format('M d, Y'),
+            'href' => route('api.authors.show', $this->id)
         ];
     }
 }

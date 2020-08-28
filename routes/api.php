@@ -34,5 +34,8 @@ Route::as('api.')->group(function () {
 
         //Categories
         Route::apiResource('categories', 'API\APICategoryController');
+
+        //Authors
+        Route::apiResource('authors', 'API\APIAuthorController');
     });
 });
